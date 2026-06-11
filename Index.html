@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SMF Footwear — Walk Different</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --obsidian: #0D0D0D;
+      --sand: #E8DDD0;
+      --sienna: #C4562A;
+      --slate: #4A4A4A;
+      --ivory: #FAF7F4;
+      --display: 'Playfair Display', Georgia, serif;
+      --body: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ivory);
+      color: var(--obsidian);
+      font-family: var(--body);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 3rem;
+      mix-blend-mode: difference;
+    }
+    .nav-logo {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: 1.4rem;
+      letter-spacing: 0.15em;
+      color: var(--ivory);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ivory);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 0.6; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--obsidian);
+      overflow: hidden;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 3rem 3rem 4rem 3rem;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sienna);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-family: var(--display);
+      font-size: clamp(4rem, 7vw, 7rem);
+      font-weight: 900;
+      line-height: 0.92;
+      color: var(--ivory);
+      letter-spacing: -0.02em;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--sand);
+    }
+
+    .hero-sub {
+      margin-top: 2rem;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: rgba(250,247,244,0.55);
+      max-width: 28ch;
+      font-weight: 300;
+    }
+
+    .hero-cta-row {
+      margin-top: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--sienna);
+      color: var(--ivory);
+      padding: 1rem 2.2rem;
+      font-family: var(--body);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-primary:hover { background: #a8441f; transform: translateY(-1px); }
+
+    .btn-ghost {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(250,247,244,0.5);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(250,247,244,0.25);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--ivory); border-color: var(--ivory); }
+
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+      background: #181818;
+    }
+
+    .hero-img-wrap {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .hero-right:hover .hero-img-wrap { transform: scale(1.04); }
+
+    .hero-shoe-svg {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* SVG shoe scene */
+    .shoe-canvas {
+      width: 90%;
+      max-width: 560px;
+    }
+
+    .hero-badge {
+      position: absolute;
+      bottom: 3rem;
+      right: 2.5rem;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 1px solid rgba(250,247,244,0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      animation: spin 18s linear infinite;
+    }
+    .hero-badge-inner {
+      font-size: 0.55rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(250,247,244,0.4);
+      line-height: 1.6;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* MARQUEE */
+    .marquee-strip {
+      background: var(--sienna);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 0.9rem 0;
+    }
+    .marquee-inner {
+      display: inline-block;
+      animation: marquee 22s linear infinite;
+    }
+    .marquee-inner span {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ivory);
+      margin: 0 2.5rem;
+    }
+    .marquee-inner span.dot {
+      color: rgba(250,247,244,0.45);
+      margin: 0;
+    }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* SECTION CHROME */
+    .section-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sienna);
+      margin-bottom: 0.75rem;
+    }
+
+    /* PRODUCTS */
+    .products {
+      padding: 7rem 3rem;
+      background: var(--ivory);
+    }
+
+    .products-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 3.5rem;
+    }
+
+    .products-title {
+      font-family: var(--display);
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .products-title em { font-style: italic; color: var(--slate); }
+
+    .view-all {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--obsidian);
+      text-decoration: none;
+      border-bottom: 1px solid var(--obsidian);
+      padding-bottom: 2px;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .view-all:hover { opacity: 0.5; }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      cursor: pointer;
+      group: true;
+    }
+
+    .product-img {
+      aspect-ratio: 4/5;
+      background: var(--sand);
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 1.2rem;
+    }
+
+    .product-img svg {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .product-card:hover .product-img svg { transform: scale(1.05) rotate(-1deg); }
+
+    .product-tag {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      background: var(--sienna);
+      color: var(--ivory);
+      padding: 0.25rem 0.6rem;
+    }
+
+    .product-name {
+      font-family: var(--display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .product-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .product-desc {
+      font-size: 0.8rem;
+      color: var(--slate);
+      font-weight: 300;
+    }
+
+    .product-price {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--obsidian);
+    }
+
+    /* BRAND STORY */
+    .story {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 70vh;
+    }
+
+    .story-visual {
+      background: var(--obsidian);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .story-text {
+      background: var(--sand);
+      padding: 6rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .story-title {
+      font-family: var(--display);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .story-title em { font-style: italic; }
+
+    .story-body {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--slate);
+      font-weight: 300;
+      max-width: 40ch;
+      margin-bottom: 2.5rem;
+    }
+
+    .story-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(74,74,74,0.2);
+    }
+
+    .stat-val {
+      font-family: var(--display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--obsidian);
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: var(--slate);
+      letter-spacing: 0.06em;
+      margin-top: 0.2rem;
+    }
+
+    /* CATEGORIES */
+    .categories {
+      padding: 7rem 3rem;
+      background: var(--obsidian);
+    }
+
+    .cat-header {
+      margin-bottom: 3rem;
+    }
+
+    .cat-title {
+      font-family: var(--display);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 700;
+      color: var(--ivory);
+      line-height: 1.1;
+    }
+    .cat-title em { font-style: italic; color: var(--sand); }
+
+    .cat-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 1rem;
+    }
+
+    .cat-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: #1a1a1a;
+    }
+
+    .cat-item:first-child {
+      grid-row: span 2;
+    }
+
+    .cat-item-inner {
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+      transition: transform 0.4s ease;
+      position: relative;
+    }
+
+    .cat-item:first-child .cat-item-inner {
+      aspect-ratio: unset;
+      height: 100%;
+      min-height: 400px;
+    }
+
+    .cat-item:hover .cat-item-inner { transform: scale(1.02); }
+
+    .cat-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+    }
+
+    .cat-item-label {
+      position: relative;
+      z-index: 2;
+    }
+    .cat-item-label h3 {
+      font-family: var(--display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--ivory);
+      margin-bottom: 0.2rem;
+    }
+    .cat-item-label p {
+      font-size: 0.72rem;
+      color: rgba(250,247,244,0.6);
+      letter-spacing: 0.08em;
+    }
+
+    /* NEWSLETTER */
+    .newsletter {
+      background: var(--sienna);
+      padding: 6rem 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .newsletter-title {
+      font-family: var(--display);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 900;
+      color: var(--ivory);
+      line-height: 1.1;
+      margin-bottom: 0.8rem;
+    }
+    .newsletter-title em { font-style: italic; }
+
+    .newsletter-sub {
+      font-size: 0.95rem;
+      color: rgba(250,247,244,0.7);
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 0;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 1rem 1.4rem;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-right: none;
+      color: var(--ivory);
+      font-family: var(--body);
+      font-size: 0.88rem;
+      outline: none;
+    }
+    .newsletter-form input::placeholder { color: rgba(250,247,244,0.45); }
+
+    .newsletter-form button {
+      background: var(--obsidian);
+      color: var(--ivory);
+      border: none;
+      padding: 1rem 1.8rem;
+      font-family: var(--body);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .newsletter-form button:hover { background: #222; }
+
+    /* FOOTER */
+    footer {
+      background: var(--obsidian);
+      padding: 5rem 3rem 2.5rem;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 4rem;
+      border-bottom: 1px solid #1f1f1f;
+    }
+
+    .footer-brand-name {
+      font-family: var(--display);
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--ivory);
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-tagline {
+      font-size: 0.85rem;
+      color: rgba(250,247,244,0.4);
+      font-weight: 300;
+      line-height: 1.7;
+      max-width: 28ch;
+    }
+
+    .footer-col-title {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(250,247,244,0.3);
+      margin-bottom: 1.4rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .footer-links a {
+      font-size: 0.88rem;
+      color: rgba(250,247,244,0.55);
+      text-decoration: none;
+      font-weight: 300;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--ivory); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 2rem;
+    }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: rgba(250,247,244,0.25);
+      letter-spacing: 0.06em;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .footer-social a {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(250,247,244,0.3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-social a:hover { color: var(--ivory); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { min-height: 55vw; }
+      .hero-left { padding: 7rem 1.5rem 3rem; }
+      .product-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .story { grid-template-columns: 1fr; }
+      .story-visual { min-height: 50vw; }
+      .story-text { padding: 4rem 2rem; }
+      .cat-grid { grid-template-columns: 1fr 1fr; }
+      .cat-item:first-child { grid-column: span 2; grid-row: span 1; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .products, .categories { padding: 5rem 1.5rem; }
+      .newsletter { padding: 4rem 1.5rem; }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .hero-title { font-size: clamp(3rem, 12vw, 5rem); }
+      .product-grid { grid-template-columns: 1fr; }
+      .cat-grid { grid-template-columns: 1fr; }
+      .cat-item:first-child { grid-column: span 1; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+      .products-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .newsletter-form { flex-direction: column; }
+      .newsletter-form input { border-right: 1px solid rgba(255,255,255,0.3); border-bottom: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-badge { animation: none; }
+      .marquee-inner { animation-play-state: paused; }
+      * { transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">SMF</a>
+    <ul class="nav-links">
+      <li><a href="#products">Collection</a></li>
+      <li><a href="#story">About</a></li>
+      <li><a href="#categories">Categories</a></li>
+      <li><a href="#newsletter">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">SS 2026 Collection</p>
+      <h1 class="hero-title">Walk<br><em>Different.</em></h1>
+      <p class="hero-sub">Footwear built for people who refuse to blend in. Crafted with intention, worn with conviction.</p>
+      <div class="hero-cta-row">
+        <a href="#products" class="btn-primary">Shop Now</a>
+        <a href="#story" class="btn-ghost">Our Story</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-img-wrap hero-shoe-svg">
+        <!-- Hero Shoe SVG Illustration -->
+        <svg class="shoe-canvas" viewBox="0 0 560 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Background glow -->
+          <ellipse cx="280" cy="340" rx="200" ry="40" fill="#C4562A" opacity="0.12"/>
+          <!-- Shadow -->
+          <ellipse cx="285" cy="370" rx="160" ry="18" fill="#000" opacity="0.4"/>
+          <!-- Sole bottom -->
+          <path d="M110 340 Q130 360 285 365 Q440 360 460 340 L450 330 Q430 348 285 352 Q140 348 120 330Z" fill="#111"/>
+          <!-- Sole mid -->
+          <path d="M120 330 Q140 348 285 352 Q430 348 450 330 L445 315 Q425 335 285 340 Q145 335 125 315Z" fill="#1a1a1a"/>
+          <!-- Sole white stripe -->
+          <path d="M125 315 Q145 333 285 338 Q425 333 445 315 L443 308 Q423 328 285 333 Q147 328 127 308Z" fill="#E8DDD0" opacity="0.9"/>
+          <!-- Upper body -->
+          <path d="M155 200 Q160 160 200 140 Q240 122 285 120 Q360 118 400 145 Q430 165 435 200 L440 310 Q420 325 285 330 Q150 325 130 310Z" fill="#E8DDD0"/>
+          <!-- Side panel -->
+          <path d="M155 200 Q165 180 195 165 Q230 148 285 145 Q340 148 370 160 L380 220 Q355 195 285 192 Q215 195 190 215Z" fill="#D4C8B8"/>
+          <!-- Toe box -->
+          <path d="M155 200 Q150 230 148 270 Q148 300 160 315 Q180 305 195 280 Q200 255 200 225 Q195 205 185 195Z" fill="#D0C4B2"/>
+          <!-- Heel counter -->
+          <path d="M420 210 Q432 240 435 280 Q435 305 425 315 Q410 308 400 285 Q395 260 395 230 Q400 215 410 210Z" fill="#C8BAA5"/>
+          <!-- SMF logo on side -->
+          <text x="240" y="240" font-family="Georgia, serif" font-size="28" font-weight="900" fill="#C4562A" letter-spacing="4" opacity="0.85">SMF</text>
+          <!-- Laces -->
+          <path d="M210 165 Q215 158 222 162" stroke="#8B7355" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M230 155 Q235 148 242 152" stroke="#8B7355" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M250 148 Q255 141 262 145" stroke="#8B7355" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M270 143 Q275 136 282 140" stroke="#8B7355" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M290 141 Q296 134 303 138" stroke="#8B7355" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M310 143 Q316 136 323 140" stroke="#8B7355" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M330 148 Q336 141 343 145" stroke="#8B7355" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Lace connecting lines -->
+          <path d="M219 163 Q240 172 258 166" stroke="#8B7355" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+          <path d="M239 153 Q258 160 278 155" stroke="#8B7355" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+          <path d="M259 146 Q278 152 298 148" stroke="#8B7355" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+          <path d="M279 141 Q298 147 319 143" stroke="#8B7355" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+          <!-- Tongue -->
+          <path d="M210 165 Q215 145 220 130 Q240 115 270 112 Q300 110 325 125 L335 165 Q310 150 270 148 Q230 150 210 165Z" fill="#BEB0A0" opacity="0.7"/>
+          <!-- Heel tab -->
+          <path d="M415 175 Q420 160 425 155 Q430 155 432 165 Q430 175 422 182Z" fill="#C4562A"/>
+          <!-- Accent line on sole -->
+          <path d="M148 275 Q200 270 285 268 Q370 270 422 275" stroke="#C4562A" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+        </svg>
+      </div>
+      <div class="hero-badge">
+        <p class="hero-badge-inner">New<br>Drop<br>2026</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip">
+    <div class="marquee-inner">
+      <span>Free Shipping Over $120</span><span class="dot">·</span>
+      <span>New SS26 Collection</span><span class="dot">·</span>
+      <span>Crafted to Last</span><span class="dot">·</span>
+      <span>Walk Different</span><span class="dot">·</span>
+      <span>30-Day Returns</span><span class="dot">·</span>
+      <span>SMF Footwear</span><span class="dot">·</span>
+      <!-- duplicate for seamless loop -->
+      <span>Free Shipping Over $120</span><span class="dot">·</span>
+      <span>New SS26 Collection</span><span class="dot">·</span>
+      <span>Crafted to Last</span><span class="dot">·</span>
+      <span>Walk Different</span><span class="dot">·</span>
+      <span>30-Day Returns</span><span class="dot">·</span>
+      <span>SMF Footwear</span><span class="dot">·</span>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <section class="products" id="products">
+    <div class="products-header">
+      <div>
+        <p class="section-label">Featured Collection</p>
+        <h2 class="products-title">New<br><em>Arrivals</em></h2>
+      </div>
+      <a href="#" class="view-all">View All →</a>
+    </div>
+    <div class="product-grid">
+
+      <!-- Product 1 -->
+      <div class="product-card">
+        <div class="product-img">
+          <span class="product-tag">New</span>
+          <svg viewBox="0 0 320 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="400" fill="#E2D6C6"/>
+            <ellipse cx="160" cy="355" rx="110" ry="14" fill="#000" opacity="0.12"/>
+            <!-- Sneaker side view -->
+            <path d="M65 220 Q70 180 100 160 Q135 140 165 138 Q220 135 255 158 Q278 175 282 210 L285 310 Q270 325 160 330 Q55 325 45 310Z" fill="#FAF7F4"/>
+            <path d="M65 220 Q72 195 100 178 Q130 162 165 160 Q215 158 245 175 L252 225 Q230 205 165 202 Q100 205 80 222Z" fill="#E8DDD0"/>
+            <path d="M45 305 Q55 318 160 322 Q265 318 282 305 L280 295 Q265 308 160 312 Q55 308 47 295Z" fill="#1a1a1a"/>
+            <path d="M47 295 Q57 308 160 312 Q263 308 280 295 L278 285 Q263 298 160 302 Q57 298 49 285Z" fill="#111"/>
+            <path d="M49 285 Q59 298 160 302 Q261 298 278 285 L276 278 Q260 292 160 295 Q60 292 51 278Z" fill="#D4C8B8" opacity="0.9"/>
+            <text x="120" y="255" font-family="Georgia, serif" font-size="22" font-weight="900" fill="#C4562A" letter-spacing="3">SMF</text>
+            <path d="M250 175 Q262 188 265 215 Q265 238 258 250 Q247 244 242 222 Q238 200 240 182Z" fill="#C4562A" opacity="0.7"/>
+          </svg>
+        </div>
+        <h3 class="product-name">SMF Runner Pro</h3>
+        <div class="product-meta">
+          <span class="product-desc">Sand / Ivory</span>
+          <span class="product-price">$145</span>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="product-card">
+        <div class="product-img">
+          <svg viewBox="0 0 320 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="400" fill="#1C1C1C"/>
+            <ellipse cx="160" cy="355" rx="110" ry="14" fill="#C4562A" opacity="0.2"/>
+            <path d="M65 220 Q70 180 100 160 Q135 140 165 138 Q220 135 255 158 Q278 175 282 210 L285 310 Q270 325 160 330 Q55 325 45 310Z" fill="#2a2a2a"/>
+            <path d="M65 220 Q72 195 100 178 Q130 162 165 160 Q215 158 245 175 L252 225 Q230 205 165 202 Q100 205 80 222Z" fill="#333"/>
+            <path d="M45 305 Q55 318 160 322 Q265 318 282 305 L280 295 Q265 308 160 312 Q55 308 47 295Z" fill="#111"/>
+            <path d="M47 295 Q57 308 160 312 Q263 308 280 295 L278 285 Q263 298 160 302 Q57 298 49 285Z" fill="#0a0a0a"/>
+            <path d="M49 285 Q59 298 160 302 Q261 298 278 285 L276 278 Q260 292 160 295 Q60 292 51 278Z" fill="#C4562A" opacity="0.8"/>
+            <text x="120" y="255" font-family="Georgia, serif" font-size="22" font-weight="900" fill="#FAF7F4" letter-spacing="3">SMF</text>
+            <path d="M250 175 Q262 188 265 215 Q265 238 258 250 Q247 244 242 222 Q238 200 240 182Z" fill="#C4562A"/>
+            <!-- accent stripe -->
+            <path d="M80 222 Q120 210 165 208 Q210 210 250 222" stroke="#C4562A" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+          </svg>
+        </div>
+        <h3 class="product-name">SMF Night Edition</h3>
+        <div class="product-meta">
+          <span class="product-desc">Obsidian / Sienna</span>
+          <span class="product-price">$165</span>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="product-card">
+        <div class="product-img">
+          <span class="product-tag">Limited</span>
+          <svg viewBox="0 0 320 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="400" fill="#C4562A" opacity="0.15"/>
+            <rect width="320" height="400" fill="#E8DDD0"/>
+            <ellipse cx="160" cy="355" rx="110" ry="14" fill="#000" opacity="0.1"/>
+            <!-- Chelsea boot -->
+            <path d="M90 320 Q90 200 105 165 Q120 135 160 128 Q200 125 218 145 Q235 165 238 200 L238 320 Q220 332 155 332 Q95 330 90 320Z" fill="#5C3D2E"/>
+            <path d="M90 320 Q90 280 92 250 Q95 240 100 238 Q105 248 105 280 L105 320Z" fill="#4A3020"/>
+            <path d="M238 320 Q236 280 234 250 Q231 240 226 238 Q221 248 222 280 L222 320Z" fill="#4A3020"/>
+            <!-- Chelsea elastic panel -->
+            <path d="M90 240 Q90 210 92 195 Q95 188 108 186 Q105 212 105 240Z" fill="#8B6955" opacity="0.8"/>
+            <path d="M238 240 Q238 210 236 195 Q233 188 220 186 Q223 212 222 240Z" fill="#8B6955" opacity="0.8"/>
+            <!-- Sole -->
+            <path d="M82 318 Q85 332 155 336 Q225 332 242 318 L238 310 Q220 325 155 328 Q92 325 86 310Z" fill="#1a1a1a"/>
+            <path d="M86 310 Q90 323 155 327 Q222 323 238 310 L236 302 Q218 317 155 320 Q94 317 88 302Z" fill="#FAF7F4" opacity="0.9"/>
+            <!-- Toe cap stitching -->
+            <path d="M110 300 Q115 270 118 240 Q120 225 125 215 Q135 205 155 205 Q175 205 185 215 Q190 225 192 240 L194 300" stroke="#7A5040" stroke-width="1.5" fill="none" stroke-dasharray="4 3" stroke-linecap="round"/>
+            <!-- Heel tab -->
+            <path d="M150 130 Q160 120 170 130 L168 145 Q160 138 152 145Z" fill="#C4562A"/>
+          </svg>
+        </div>
+        <h3 class="product-name">SMF Chelsea Boot</h3>
+        <div class="product-meta">
+          <span class="product-desc">Tan Leather</span>
+          <span class="product-price">$215</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BRAND STORY -->
+  <section class="story" id="story">
+    <div class="story-visual">
+      <svg viewBox="0 0 480 560" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:85%; max-width:420px;">
+        <!-- Large artistic shoe -->
+        <ellipse cx="240" cy="490" rx="180" ry="24" fill="#C4562A" opacity="0.15"/>
+        <!-- Boot body -->
+        <path d="M120 480 Q118 340 130 270 Q145 190 175 155 Q200 125 240 120 Q280 120 305 148 Q330 175 342 240 L345 480 Q320 500 240 502 Q160 500 120 480Z" fill="#E8DDD0"/>
+        <!-- Side details -->
+        <path d="M120 480 Q118 400 125 350 Q130 330 142 322 Q148 348 148 400 L148 480Z" fill="#D4C8B8"/>
+        <path d="M345 480 Q345 400 340 350 Q335 330 323 322 Q317 348 316 400 L316 480Z" fill="#D4C8B8"/>
+        <!-- Lacing panel -->
+        <path d="M185 158 Q195 135 240 128 Q285 128 295 155 L292 280 Q275 260 240 258 Q205 260 188 280Z" fill="#C8BAA8"/>
+        <!-- Laces zigzag -->
+        <path d="M205 168 L235 180 L205 192 L235 204 L205 216 L235 228" stroke="#8B7355" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M275 168 L245 180 L275 192 L245 204 L275 216 L245 228" stroke="#8B7355" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M235 180 L245 180 M235 204 L245 204 M235 228 L245 228" stroke="#8B7355" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- SMF brand mark -->
+        <text x="180" y="370" font-family="Georgia, serif" font-size="38" font-weight="900" fill="#C4562A" letter-spacing="6" opacity="0.9">SMF</text>
+        <!-- Sole -->
+        <path d="M112 478 Q118 500 240 504 Q362 500 368 478 L362 468 Q350 490 240 494 Q130 490 118 468Z" fill="#111"/>
+        <path d="M118 468 Q128 490 240 494 Q352 490 362 468 L358 456 Q348 477 240 482 Q132 477 122 456Z" fill="#222"/>
+        <path d="M122 456 Q132 477 240 482 Q348 477 358 456 L356 447 Q346 468 240 473 Q134 468 124 447Z" fill="#C4562A" opacity="0.7"/>
+        <!-- Heel brand accent -->
+        <path d="M232 124 Q240 112 248 124 L246 140 Q240 134 234 140Z" fill="#C4562A"/>
+      </svg>
+    </div>
+    <div class="story-text">
+      <p class="section-label">Our Story</p>
+      <h2 class="story-title">Rooted in<br><em>craft.</em><br>Driven by<br>design.</h2>
+      <p class="story-body">SMF Footwear started in 2008 with one conviction: that shoes should feel as considered as the people who wear them. Every pair we make begins with a sketch, a material, and a question — what does this person need from the ground up?</p>
+      <a href="#" class="btn-primary" style="align-self:flex-start; background:var(--obsidian);">Read More</a>
+      <div class="story-stats">
+        <div>
+          <div class="stat-val">12+</div>
+          <div class="stat-label">Years of craft</div>
+        </div>
+        <div>
+          <div class="stat-val">48k</div>
+          <div class="stat-label">Pairs sold</div>
+        </div>
+        <div>
+          <div class="stat-val">100%</div>
+          <div class="stat-label">Ethically made</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="categories" id="categories">
+    <div class="cat-header">
+      <p class="section-label" style="color:rgba(250,247,244,0.4);">Shop by Style</p>
+      <h2 class="cat-title">Find Your<br><em>Fit</em></h2>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-item">
+        <div class="cat-item-inner" style="background:linear-gradient(135deg,#2a2420 0%,#1a1a1a 100%);">
+          <div class="cat-item-overlay"></div>
+          <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.35;" viewBox="0 0 400 600" fill="none">
+            <path d="M60 490 Q62 350 75 270 Q90 180 115 148 Q145 118 200 114 Q255 114 280 142 Q308 172 320 240 L322 490 Q302 508 195 510 Q85 508 60 490Z" fill="#E8DDD0"/>
+            <path d="M145 152 Q155 128 200 122 Q245 122 258 150 L255 285 Q238 262 200 260 Q162 262 145 285Z" fill="#C8BAA8"/>
+            <path d="M165 162 L197 175 L165 188 L197 201 L165 214 L197 227" stroke="#8B7355" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M235 162 L203 175 L235 188 L203 201 L235 214 L203 227" stroke="#8B7355" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <text x="148" y="380" font-family="Georgia,serif" font-size="42" font-weight="900" fill="#C4562A" letter-spacing="6">SMF</text>
+            <path d="M52 487 Q60 507 195 512 Q332 507 342 487 L336 475 Q322 496 195 500 Q68 496 58 475Z" fill="#111"/>
+          </svg>
+          <div class="cat-item-label">
+            <h3>Lifestyle</h3>
+            <p>28 styles available</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cat-item">
+        <div class="cat-item-inner" style="background:linear-gradient(135deg,#3d2218 0%,#2a1a10 100%);">
+          <div class="cat-item-overlay"></div>
+          <svg style="position:absolute;width:80%;left:10%;top:0;height:100%;opacity:0.4;" viewBox="0 0 300 300" fill="none">
+            <path d="M40 190 Q42 155 60 135 Q80 115 150 112 Q200 112 230 130 Q255 148 258 180 L260 260 Q245 272 150 274 Q55 272 38 260Z" fill="#C8BAA8"/>
+            <text x="102" y="215" font-family="Georgia,serif" font-size="26" font-weight="900" fill="#C4562A" letter-spacing="4">SMF</text>
+            <path d="M34 257 Q40 268 150 272 Q260 268 265 257 L263 248 Q254 260 150 264 Q46 260 36 248Z" fill="#111"/>
+          </svg>
+          <div class="cat-item-label">
+            <h3>Running</h3>
+            <p>14 styles available</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cat-item">
+        <div class="cat-item-inner" style="background:linear-gradient(135deg,#2a2a2a 0%,#111 100%);">
+          <div class="cat-item-overlay"></div>
+          <svg style="position:absolute;width:75%;left:12%;top:5%;height:90%;opacity:0.4;" viewBox="0 0 300 350" fill="none">
+            <path d="M55 295 Q55 210 64 168 Q76 130 100 110 Q124 92 152 90 Q182 90 202 108 Q222 127 230 162 L232 295 Q220 306 148 308 Q75 306 55 295Z" fill="#5C3D2E"/>
+            <path d="M55 295 Q55 250 58 225 Q62 215 70 212 Q73 232 73 268 L73 295Z" fill="#4A3020"/>
+            <text x="104" y="230" font-family="Georgia,serif" font-size="24" font-weight="900" fill="#FAF7F4" letter-spacing="3" opacity="0.7">SMF</text>
+            <path d="M48 292 Q54 304 148 308 Q244 304 240 292 L237 283 Q228 296 148 300 Q68 296 51 283Z" fill="#111"/>
+            <path d="M51 283 Q58 295 148 299 Q240 295 237 283 L235 275 Q226 288 148 292 Q70 288 53 275Z" fill="#FAF7F4" opacity="0.8"/>
+          </svg>
+          <div class="cat-item-label">
+            <h3>Boots</h3>
+            <p>19 styles available</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cat-item">
+        <div class="cat-item-inner" style="background:linear-gradient(135deg,#1a2030 0%,#0d1520 100%);">
+          <div class="cat-item-overlay"></div>
+          <div class="cat-item-label">
+            <h3>New Arrivals</h3>
+            <p>Just dropped — SS26</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter" id="newsletter">
+    <p class="section-label" style="color:rgba(250,247,244,0.6);">Stay in the Loop</p>
+    <h2 class="newsletter-title">First to know,<br><em>first to wear.</em></h2>
+    <p class="newsletter-sub">Join the SMF community. New drops, exclusive access, no noise.</p>
+    <div class="newsletter-form">
+      <input type="email" placeholder="Your email address" />
+      <button type="button">Subscribe</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">SMF</div>
+        <p class="footer-tagline">Footwear made for people who move with intention. Crafted to last, designed to stand out.</p>
+      </div>
+      <div>
+        <p class="footer-col-title">Collection</p>
+        <ul class="footer-links">
+          <li><a href="#">New Arrivals</a></li>
+          <li><a href="#">Lifestyle</a></li>
+          <li><a href="#">Running</a></li>
+          <li><a href="#">Boots</a></li>
+          <li><a href="#">Sale</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Company</p>
+        <ul class="footer-links">
+          <li><a href="#">About SMF</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Support</p>
+        <ul class="footer-links">
+          <li><a href="#">Sizing Guide</a></li>
+          <li><a href="#">Shipping & Returns</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 SMF Footwear. All rights reserved.</p>
+      <div class="footer-social">
+        <a href="#">Instagram</a>
+        <a href="#">TikTok</a>
+        <a href="#">Pinterest</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
+
